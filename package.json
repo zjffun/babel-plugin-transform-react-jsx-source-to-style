@@ -28,7 +28,7 @@
     "build": "rimraf lib && tsc",
     "dev": "tsc -w",
     "eslint-fix": "eslint --fix .",
-    "prepublishOnly": "npm run test && npm run build",
+    "prepublishOnly": "npm run build && npm run test",
     "prettier-fix": "prettier --write .",
     "sort-package-json": "sort-package-json",
     "test": "jest",
@@ -54,6 +54,7 @@
   "peerDependencies": {
     "@babel/core": "^7.0.0-0"
   },
+  "packageManager": "yarn@1.22.22",
   "engines": {
     "node": ">=6.9.0"
   },
