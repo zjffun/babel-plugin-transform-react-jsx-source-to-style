@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic-sample 1`] = `
+"var _jsxFileName = "/fake/path/mock.js";
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: {
+    '--source-code-location': _jsxFileName + ':' + 2 + ':' + 9
+  }
+});"
+`;
+
+exports[`no-jsx 1`] = `"var x = 42;"`;
+
+exports[`with-style add add string style 1`] = `
+"var _jsxFileName = "/fake/path/mock.js";
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 2 + ':' + 9) + ';' + ""
+});
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 3 + ':' + 9) + ';' + ""
+});
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 4 + ':' + 9) + ';' + 0
+});
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 5 + ':' + 9) + ';' + 1
+});
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 6 + ':' + 9) + ';' + "--source-code-location: test"
+});"
+`;
+
+exports[`with-style add assign object style 1`] = `
+"var _jsxFileName = "/fake/path/mock.js";
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: Object.assign({
+    '--source-code-location': _jsxFileName + ':' + 2 + ':' + 9
+  }, null)
+});
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: Object.assign({
+    '--source-code-location': _jsxFileName + ':' + 3 + ':' + 9
+  }, undefined)
+});
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: Object.assign({
+    '--source-code-location': _jsxFileName + ':' + 4 + ':' + 9
+  }, {
+    '--source-code-location': test
+  })
+});
+var x = /*#__PURE__*/React.createElement("sometag", {
+  style: Object.assign({
+    '--source-code-location': _jsxFileName + ':' + 5 + ':' + 9
+  }, styleObj)
+});"
+`;
