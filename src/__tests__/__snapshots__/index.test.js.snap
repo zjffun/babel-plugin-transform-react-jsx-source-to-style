@@ -1,57 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`basic-sample 1`] = `
+exports[`basic-sample should work 1`] = `
 "var _jsxFileName = "/fake/path/mock.js";
-var x = /*#__PURE__*/React.createElement("sometag", {
+var x = /*#__PURE__*/React.createElement("div", {
   style: {
     '--source-code-location': _jsxFileName + ':' + 2 + ':' + 9
+  }
+});
+var x = /*#__PURE__*/React.createElement(View, {
+  style: {
+    '--source-code-location': _jsxFileName + ':' + 3 + ':' + 9
   }
 });"
 `;
 
-exports[`no-jsx 1`] = `"var x = 42;"`;
-
-exports[`with-style add add string style 1`] = `
-"var _jsxFileName = "/fake/path/mock.js";
-var x = /*#__PURE__*/React.createElement("sometag", {
-  style: '--source-code-location:' + (_jsxFileName + ':' + 2 + ':' + 9) + ';' + ""
-});
-var x = /*#__PURE__*/React.createElement("sometag", {
-  style: '--source-code-location:' + (_jsxFileName + ':' + 3 + ':' + 9) + ';' + ""
-});
-var x = /*#__PURE__*/React.createElement("sometag", {
-  style: '--source-code-location:' + (_jsxFileName + ':' + 4 + ':' + 9) + ';' + 0
-});
-var x = /*#__PURE__*/React.createElement("sometag", {
-  style: '--source-code-location:' + (_jsxFileName + ':' + 5 + ':' + 9) + ';' + 1
-});
-var x = /*#__PURE__*/React.createElement("sometag", {
-  style: '--source-code-location:' + (_jsxFileName + ':' + 6 + ':' + 9) + ';' + "--source-code-location: test"
+exports[`compoent will not add style 1`] = `
+"var x = /*#__PURE__*/React.createElement(TestComp, null);
+var x = /*#__PURE__*/React.createElement(TestComp, null);
+var x = /*#__PURE__*/React.createElement(TestComp, {
+  style: {
+    color: red
+  }
 });"
 `;
 
-exports[`with-style add assign object style 1`] = `
+exports[`no-jsx will do nothing 1`] = `"var x = 42;"`;
+
+exports[`with JSXSpreadAttribute will not add style 1`] = `
+"var x = /*#__PURE__*/React.createElement("div", test);
+var x = /*#__PURE__*/React.createElement(View, test);"
+`;
+
+exports[`with multiple styles shoudl work 1`] = `
 "var _jsxFileName = "/fake/path/mock.js";
-var x = /*#__PURE__*/React.createElement("sometag", {
+var x = /*#__PURE__*/React.createElement("img", {
+  style: "",
+  style: {
+    '--source-code-location': test
+  },
+  style: '--source-code-location:' + (_jsxFileName + ':' + 2 + ':' + 9) + ';' + "--source-code-location: test"
+});
+var x = /*#__PURE__*/React.createElement("img", {
+  style: "",
+  style: "--source-code-location: test",
+  style: Object.assign({
+    '--source-code-location': _jsxFileName + ':' + 3 + ':' + 9
+  }, {
+    '--source-code-location': test
+  })
+});"
+`;
+
+exports[`with object style should work 1`] = `
+"var _jsxFileName = "/fake/path/mock.js";
+var x = /*#__PURE__*/React.createElement("img", {
   style: Object.assign({
     '--source-code-location': _jsxFileName + ':' + 2 + ':' + 9
   }, null)
 });
-var x = /*#__PURE__*/React.createElement("sometag", {
+var x = /*#__PURE__*/React.createElement("img", {
   style: Object.assign({
     '--source-code-location': _jsxFileName + ':' + 3 + ':' + 9
   }, undefined)
 });
-var x = /*#__PURE__*/React.createElement("sometag", {
+var x = /*#__PURE__*/React.createElement("img", {
   style: Object.assign({
     '--source-code-location': _jsxFileName + ':' + 4 + ':' + 9
   }, {
     '--source-code-location': test
   })
 });
-var x = /*#__PURE__*/React.createElement("sometag", {
+var x = /*#__PURE__*/React.createElement("img", {
   style: Object.assign({
     '--source-code-location': _jsxFileName + ':' + 5 + ':' + 9
   }, styleObj)
+});"
+`;
+
+exports[`with string style should work 1`] = `
+"var _jsxFileName = "/fake/path/mock.js";
+var x = /*#__PURE__*/React.createElement("img", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 2 + ':' + 9) + ';' + ""
+});
+var x = /*#__PURE__*/React.createElement("img", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 3 + ':' + 9) + ';' + ""
+});
+var x = /*#__PURE__*/React.createElement("img", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 4 + ':' + 9) + ';' + 0
+});
+var x = /*#__PURE__*/React.createElement("img", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 5 + ':' + 9) + ';' + 1
+});
+var x = /*#__PURE__*/React.createElement("img", {
+  style: '--source-code-location:' + (_jsxFileName + ':' + 6 + ':' + 9) + ';' + "--source-code-location: test"
 });"
 `;

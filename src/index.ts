@@ -15,8 +15,14 @@
 import { declare } from "@babel/helper-plugin-utils";
 import { types as t, template } from "@babel/core";
 
+import htmlTags from "./htmlTags";
+import taroComponentNames from "./taroComponentNames";
+
 const TRACE_ID = "--source-code-location";
 const FILE_NAME_VAR = "_jsxFileName";
+
+// Taro Components or HTML tags
+const atomicNodeName = [...taroComponentNames, ...htmlTags];
 
 const createNodeFromNullish = <T, N extends t.Node>(
   val: T | null,
@@ -87,9 +93,23 @@ export default declare<State>((api) => {
         const { node } = path;
         if (
           // the element was generated and doesn't have location information
-          !node.loc
+          !node.loc ||
+          // the element is not a atomic node (i.e. a component)
+          !atomicNodeName.includes(node.name.name)
         ) {
           return;
+        }
+
+        let lastStyleAttr;
+        for (const attr of node.attributes) {
+          if (t.isJSXSpreadAttribute(attr)) {
+            // JSXSpreadAttribute may contain a style, so style will not added when meet JSXSpreadAttribute
+            return;
+          }
+
+          if (isStyleAttr(attr)) {
+            lastStyleAttr = attr;
+          }
         }
 
         if (!state.fileNameIdentifier) {
@@ -102,10 +122,7 @@ export default declare<State>((api) => {
           });
         }
 
-        const styleAttrs = node.attributes.filter(isStyleAttr);
-
-        if (styleAttrs.length > 0) {
-          const lastStyleAttr = styleAttrs[styleAttrs.length - 1];
+        if (lastStyleAttr) {
           const value = lastStyleAttr.value;
           if (t.isJSXExpressionContainer(value)) {
             const expression = value.expression;

@@ -7,15 +7,16 @@ const babelConfig = {
   plugins: [plugin],
 };
 
-it("basic-sample", () => {
+it("basic-sample should work", () => {
   const example = `
-var x = <sometag />;
+var x = <div></div>;
+var x = <View></View>;
 `;
   const { code } = babel.transform(example, babelConfig);
   expect(code).toMatchSnapshot();
 });
 
-it("no-jsx", () => {
+it("no-jsx will do nothing", () => {
   const example = `
 var x = 42;
 `;
@@ -23,24 +24,53 @@ var x = 42;
   expect(code).toMatchSnapshot();
 });
 
-it("with-style add assign object style", () => {
+it("compoent will not add style", () => {
   const example = `
-var x = <sometag style={null} />;
-var x = <sometag style={undefined} />;
-var x = <sometag style={{'--source-code-location': test}} />;
-var x = <sometag style={styleObj} />;
+var x = <TestComp />;
+var x = <TestComp></TestComp>;
+var x = <TestComp style={{color: red}} />;
 `;
   const { code } = babel.transform(example, babelConfig);
   expect(code).toMatchSnapshot();
 });
 
-it("with-style add add string style", () => {
+it("with object style should work", () => {
   const example = `
-var x = <sometag style="" />;
-var x = <sometag style={""} />;
-var x = <sometag style={0} />;
-var x = <sometag style={1} />;
-var x = <sometag style={"--source-code-location: test"} />;
+var x = <img style={null} />;
+var x = <img style={undefined} />;
+var x = <img style={{'--source-code-location': test}} />;
+var x = <img style={styleObj} />;
+`;
+  const { code } = babel.transform(example, babelConfig);
+  expect(code).toMatchSnapshot();
+});
+
+it("with string style should work", () => {
+  const example = `
+var x = <img style="" />;
+var x = <img style={""} />;
+var x = <img style={0} />;
+var x = <img style={1} />;
+var x = <img style={"--source-code-location: test"} />;
+`;
+  const { code } = babel.transform(example, babelConfig);
+  expect(code).toMatchSnapshot();
+});
+
+it("with multiple styles shoudl work", () => {
+  const example = `
+var x = <img style="" style={{'--source-code-location': test}} style={"--source-code-location: test"} />;
+var x = <img style="" style={"--source-code-location: test"} style={{'--source-code-location': test}} />;
+`;
+  const { code } = babel.transform(example, babelConfig);
+  expect(code).toMatchSnapshot();
+});
+
+
+it("with JSXSpreadAttribute will not add style", () => {
+  const example = `
+var x = <div {...test}></div>;
+var x = <View {...test}></View>;
 `;
   const { code } = babel.transform(example, babelConfig);
   expect(code).toMatchSnapshot();
