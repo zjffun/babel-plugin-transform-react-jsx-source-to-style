@@ -4,7 +4,7 @@
 
 > 为所有 JSX 元素增加 `style['--source-code-location']`。
 
-English | [简体中文](./README.zh-CN.md)
+[English](./README.md) | 简体中文
 
 ## 示例
 
